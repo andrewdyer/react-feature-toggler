@@ -1,4 +1,4 @@
-# React Feature Toggle
+# React Feature Toggler
 
 A package to help you implement feature toggles in your React app.
 
