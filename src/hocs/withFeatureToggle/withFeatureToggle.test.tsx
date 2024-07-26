@@ -4,7 +4,7 @@ import { useFeatureToggle } from '../../hooks';
 import withFeatureToggle from './withFeatureToggle';
 
 jest.mock('../../hooks', () => ({
-    useFeatureToggle: jest.fn(),
+    useFeatureToggle: jest.fn()
 }));
 
 const mockUseFeatureToggle = useFeatureToggle as jest.Mock;
@@ -22,7 +22,7 @@ describe('withFeatureToggle', () => {
 
     test('should render the component when the feature is enabled', () => {
         mockUseFeatureToggle.mockReturnValue({
-            isFeatureEnabled: (name: string) => name === 'newFeature',
+            isFeatureEnabled: (name: string) => name === 'newFeature'
         });
 
         render(<WrappedComponent />);
@@ -32,7 +32,7 @@ describe('withFeatureToggle', () => {
 
     test('should not render the component when the feature is disabled', () => {
         mockUseFeatureToggle.mockReturnValue({
-            isFeatureEnabled: () => false,
+            isFeatureEnabled: () => false
         });
 
         render(<WrappedComponent />);
@@ -40,4 +40,3 @@ describe('withFeatureToggle', () => {
         expect(screen.queryByText('Feature Component')).toBeNull();
     });
 });
-
