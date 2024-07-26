@@ -16,49 +16,106 @@ npm install @anddye/react-feature-toggle
 
 ## Usage
 
-Define your features:
+### Define Your Features
+
+Create a file to define your feature toggles:
 
 ```ts
-// index.tsx
-const featureToggles = {
-    newFeature: true
+// featureToggles.ts
+export const featureToggles = {
+    newFeature: true,
+    anotherFeature: false
 };
 ```
 
-Wrap your React app in the `FeatureToggleProvider`, passing your featureToggles as a prop:
+### Wrap Your React App
+
+Wrap your React app in the `FeatureToggleProvider`, passing your feature toggles as a prop:
 
 ```tsx
 // index.tsx
-<FeatureToggleProvider featureToggles={featureToggles}>
-    <App />
-</FeatureToggleProvider>
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { FeatureToggleProvider } from '@anddye/react-feature-toggle';
+import { featureToggles } from './featureToggles';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+    <FeatureToggleProvider featureToggles={featureToggles}>
+        <App />
+    </FeatureToggleProvider>,
+    document.getElementById('root')
+);
 ```
 
-Use the hook to check if your feature is enabled:
+### Use the Hook
+
+Use the `useFeatureToggle` hook to check if a feature is enabled:
 
 ```tsx
 // App.tsx
+import React from 'react';
 import { useFeatureToggle } from '@anddye/react-feature-toggle';
 
 function App() {
     const { isFeatureEnabled } = useFeatureToggle();
 
     const newFeatureEnabled = isFeatureEnabled('newFeature');
+    const anotherFeatureEnabled = isFeatureEnabled('anotherFeature');
 
-    return <div>{newFeatureEnabled ? 'Feature enabled' : 'Feature disabled'}</div>;
+    return (
+        <div>
+            {newFeatureEnabled ? 'New Feature enabled' : 'New Feature disabled'}
+            {anotherFeatureEnabled ? 'Another Feature enabled' : 'Another Feature disabled'}
+        </div>
+    );
 }
 
 export default App;
 ```
 
-Alternatively, use the with HOC:
+### Use the HOC
+
+Alternatively, use the withFeatureToggle higher-order component (HOC):
 
 ```tsx
 // App.tsx
+import React from 'react';
 import { withFeatureToggle } from '@anddye/react-feature-toggle';
 
 function App() {
     return <div>Feature enabled</div>;
+}
+
+export default withFeatureToggle('newFeature')(App);
+```
+
+### Combining Both Methods
+
+You can combine both methods to enable different parts of your app conditionally:
+
+```tsx
+// App.tsx
+import React from 'react';
+import { useFeatureToggle, withFeatureToggle } from '@anddye/react-feature-toggle';
+
+function FeatureComponent() {
+    const { isFeatureEnabled } = useFeatureToggle();
+    const anotherFeatureEnabled = isFeatureEnabled('anotherFeature');
+
+    return (
+        <div>{anotherFeatureEnabled ? 'Another Feature enabled' : 'Another Feature disabled'}</div>
+    );
+}
+
+function App() {
+    return (
+        <div>
+            <FeatureComponent />
+            <div>Always visible content</div>
+        </div>
+    );
 }
 
 export default withFeatureToggle('newFeature')(App);
