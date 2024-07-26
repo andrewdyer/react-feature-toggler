@@ -23,7 +23,7 @@ Wrap your React app in the `FeatureToggleProvider`, passing your featureToggles 
 
 ```tsx
 // index.tsx
-<FeatureToggleProvider featureToggles={featureFlags}>
+<FeatureToggleProvider featureToggles={featureToggles}>
     <App />
 </FeatureToggleProvider>
 ```
