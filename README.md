@@ -8,6 +8,56 @@ To install this package use npm:
 npm install @anddye/react-feature-toggle
 ```
 
+## Usage
+
+Define your features:
+
+```ts
+// index.tsx
+const featureToggles = {
+    newFeature: true
+};
+```
+
+Wrap your React app in the `FeatureToggleProvider`, passing your featureToggles as a prop:
+
+```tsx
+// index.tsx
+<FeatureToggleProvider featureToggles={featureFlags}>
+    <App />
+</FeatureToggleProvider>
+```
+
+Use the hook to check if your feature is enabled:
+
+```tsx
+// App.tsx
+import { useFeatureToggle } from '@anddye/react-feature-toggle';
+
+function App() {
+    const { isFeatureEnabled } = useFeatureToggle();
+
+    return <div>{isFeatureEnabled('newFeature') ? 'Feature enabled' : 'Feature disabled'}</div>;
+}
+
+export default App;
+```
+
+Alternatively, use the with HOC:
+
+```tsx
+// App.tsx
+import { withFeatureToggle } from '@anddye/react-feature-toggle';
+
+const AppWithFeatureToggle = withFeatureToggle('newFeature')(App);
+
+function App() {
+    return <div>Feature enabled</div>;
+}
+
+export default AppWithFeatureToggle;
+```
+
 ## Local Development
 
 For local development, use Yalc to install this package in your project.
