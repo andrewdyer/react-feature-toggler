@@ -43,7 +43,9 @@ import { useFeatureToggle } from '@anddye/react-feature-toggle';
 function App() {
     const { isFeatureEnabled } = useFeatureToggle();
 
-    return <div>{isFeatureEnabled('newFeature') ? 'Feature enabled' : 'Feature disabled'}</div>;
+    const newFeatureEnabled = isFeatureEnabled('newFeature');
+
+    return <div>{newFeatureEnabled ? 'Feature enabled' : 'Feature disabled'}</div>;
 }
 
 export default App;
