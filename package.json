@@ -1,5 +1,5 @@
 {
-    "name": "@anddye/react-feature-toggle",
+    "name": "react-feature-toggler",
     "description": "A package to help you implement feature toggles in your React app",
     "version": "1.0.0",
     "main": "dist/cjs/index.js",

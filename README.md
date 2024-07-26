@@ -11,7 +11,7 @@ Licensed under MIT. Totally free for private or commercial projects.
 To install this package use npm:
 
 ```bash
-npm install @anddye/react-feature-toggle
+npm install react-feature-toggler
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ Wrap your React app in the `FeatureToggleProvider`, passing your feature toggles
 // index.tsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { FeatureToggleProvider } from '@anddye/react-feature-toggle';
+import { FeatureToggleProvider } from 'react-feature-toggler';
 import { featureToggles } from './featureToggles';
 import App from './App';
 
@@ -56,7 +56,7 @@ Use the `useFeatureToggle` hook to check if a feature is enabled:
 ```tsx
 // App.tsx
 import React from 'react';
-import { useFeatureToggle } from '@anddye/react-feature-toggle';
+import { useFeatureToggle } from 'react-feature-toggler';
 
 function App() {
     const { isFeatureEnabled } = useFeatureToggle();
@@ -82,7 +82,7 @@ Alternatively, use the withFeatureToggle higher-order component (HOC):
 ```tsx
 // App.tsx
 import React from 'react';
-import { withFeatureToggle } from '@anddye/react-feature-toggle';
+import { withFeatureToggle } from 'react-feature-toggler';
 
 function App() {
     return <div>Feature enabled</div>;
@@ -98,7 +98,7 @@ You can combine both methods to enable different parts of your app conditionally
 ```tsx
 // App.tsx
 import React from 'react';
-import { useFeatureToggle, withFeatureToggle } from '@anddye/react-feature-toggle';
+import { useFeatureToggle, withFeatureToggle } from 'react-feature-toggler';
 
 function FeatureComponent() {
     const { isFeatureEnabled } = useFeatureToggle();
@@ -138,7 +138,7 @@ npm install yalc -g
 First, navigate to the project directory where you want to use this package and run:
 
 ```bash
-yalc add @anddye/react-feature-toggle
+yalc add react-feature-toggler
 ```
 
 This will install the package from the local Yalc store. You can now use it in the project as you would with any other npm package.
@@ -148,7 +148,7 @@ This will install the package from the local Yalc store. You can now use it in t
 After publishing changes to this package to the local Yalc store, navigate to the project directory and run:
 
 ```bash
-yalc update @anddye/react-feature-toggle
+yalc update react-feature-toggler
 ```
 
 This will update the installed version of this package in the project.
