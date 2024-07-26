@@ -1,5 +1,7 @@
 # React Feature Toggle
 
+A package to help you implement feature toggles in your React app.
+
 ## License
 
 Licensed under MIT. Totally free for private or commercial projects.
