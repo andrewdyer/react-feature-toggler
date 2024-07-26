@@ -57,13 +57,11 @@ Alternatively, use the with HOC:
 // App.tsx
 import { withFeatureToggle } from '@anddye/react-feature-toggle';
 
-const AppWithFeatureToggle = withFeatureToggle('newFeature')(App);
-
 function App() {
     return <div>Feature enabled</div>;
 }
 
-export default AppWithFeatureToggle;
+export default withFeatureToggle('newFeature')(App);
 ```
 
 ## Local Development
