@@ -200,3 +200,29 @@ Publishes the package to the local Yalc store for local development.
 ### `npm run yalc:push`
 
 Publishes updates to the package in the local Yalc store and pushes the changes to linked projects.
+
+## Publishing
+
+This repository is configured to publish the package to npm, every time you publish a new release, using GitHub Actions.
+
+### Enabling Publishing
+
+Publishing is controlled by the `PUBLISH_ENABLED` environment variable. To enable publishing, you need to set this variable to true. You can set environment variables in your repository settings:
+
+1. Go to your repository on GitHub.
+2. Click on Settings.
+3. Navigate to Secrets and variables > Actions.
+4. Add a new repository variable named `PUBLISH_ENABLED` and set its value to true.
+
+### Creating and Using an npm Token
+
+To publish the package, you need an npm token:
+
+1. Log in to your npm account.
+2. Navigate to Access Tokens in your npm account settings.
+3. Generate a new token with the Automation option, especially if you have 2FA enabled.
+4. Add the token to your GitHub repository secrets:
+    - Go to Settings > Secrets and variables > Actions.
+    - Add a new secret named `NPM_TOKEN` and paste your npm token.
+
+By configuring these settings, the GitHub Actions workflow will publish your package to npm when you create a new release.

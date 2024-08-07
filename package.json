@@ -27,6 +27,10 @@
         "typescript"
     ],
     "author": "Andrew Dyer (https://github.com/andrewdyer)",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andrewdyer/react-feature-toggler.git"
+    },
     "license": "MIT",
     "devDependencies": {
         "@testing-library/jest-dom": "^6.4.8",
