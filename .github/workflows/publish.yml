@@ -8,8 +8,8 @@ jobs:
     build:
         # if: env.PUBLISH_ENABLED == 'true'
         runs-on: ubuntu-latest
-          permissions:
-            id-token: write
+        permissions:
+          id-token: write
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
