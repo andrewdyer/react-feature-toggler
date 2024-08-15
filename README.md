@@ -205,8 +205,6 @@ Publishes updates to the package in the local Yalc store and pushes the changes 
 
 This repository is configured to publish the package to npm, every time you publish a new release, using GitHub Actions.
 
-### Enabling Publishing
-
 ### Creating and Using an npm Token
 
 To publish the package, you need an npm token:
