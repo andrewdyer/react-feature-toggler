@@ -11,7 +11,10 @@ const TestComponent: React.FC = () => {
     return <div>{isRegisterEnabled ? 'Enabled' : 'Disabled'}</div>;
 };
 
-const renderComponent = (props: { featureToggles: Record<string, boolean> }) =>
+const renderComponent = (props: {
+    featureToggles: Record<string, boolean>;
+    onFeatureDisabled?: (featureName: string) => void;
+}) =>
     render(
         <FeatureToggleProvider {...props}>
             <TestComponent />
@@ -44,6 +47,20 @@ describe('FeatureToggleProvider', () => {
             featureToggles: {}
         });
 
+        expect(screen.getByText('Disabled')).toBeInTheDocument();
+    });
+
+    test('should call onPermissionError when permission is not granted', () => {
+        const onFeatureDisabled = jest.fn();
+
+        renderComponent({
+            featureToggles: {
+                enableRegister: false
+            },
+            onFeatureDisabled
+        });
+
+        expect(onFeatureDisabled).toHaveBeenCalledWith('enableRegister');
         expect(screen.getByText('Disabled')).toBeInTheDocument();
     });
 });

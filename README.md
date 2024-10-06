@@ -40,9 +40,14 @@ import { FeatureToggleProvider } from 'react-feature-toggler';
 import { featureToggles } from './featureToggles';
 import App from './App';
 
+// Optional: Define a callback function to handle disabled features
+const onFeatureDisabled = (featureName: string) => {
+    console.log(`Feature ${featureName} is disabled`);
+};
+
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
-    <FeatureToggleProvider featureToggles={featureToggles}>
+    <FeatureToggleProvider featureToggles={featureToggles} onFeatureDisabled={onFeatureDisabled}>
         <App />
     </FeatureToggleProvider>,
     document.getElementById('root')

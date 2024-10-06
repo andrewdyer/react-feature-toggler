@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import FeatureToggleContext from '../FeatureToggleContext';
 
 export interface FeatureToggleProviderProps {
     featureToggles: Record<string, boolean>;
     children: React.ReactNode;
+    onFeatureDisabled?: (featureName: string) => void;
 }
 
 const FeatureToggleProvider: React.FC<FeatureToggleProviderProps> = ({
     children,
-    featureToggles
+    featureToggles,
+    onFeatureDisabled
 }) => {
-    const isFeatureEnabled = (featureName: string): boolean => featureToggles[featureName] || false;
+    const isFeatureEnabled = useMemo(
+        () =>
+            (featureName: string): boolean => {
+                const enabled = featureToggles[featureName] || false;
+
+                if (!enabled && onFeatureDisabled) {
+                    onFeatureDisabled(featureName);
+                }
+
+                return enabled;
+            },
+        [featureToggles, onFeatureDisabled]
+    );
 
     return (
         <FeatureToggleContext.Provider value={{ isFeatureEnabled }}>
