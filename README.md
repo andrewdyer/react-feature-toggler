@@ -1,12 +1,12 @@
-# React Feature Toggler
+# 🔀 React Feature Toggler
 
 A package to help you implement feature toggles in your React app.
 
-## License
+## 📄 License
 
 Licensed under MIT. Totally free for private or commercial projects.
 
-## Getting Started
+## 🚀 Getting Started
 
 To install this package use npm:
 
@@ -14,7 +14,7 @@ To install this package use npm:
 npm install react-feature-toggler
 ```
 
-## Usage
+## 📖 Usage
 
 ### Define Your Features
 
