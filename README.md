@@ -80,7 +80,7 @@ function App() {
   const anotherFeatureEnabled = isFeatureEnabled('anotherFeature');
 
   return (
-    <div>
+    <>
       {newFeatureEnabled
         ? 'New Feature enabled'
         : 'New Feature disabled'}
@@ -88,7 +88,7 @@ function App() {
       {anotherFeatureEnabled
         ? 'Another Feature enabled'
         : 'Another Feature disabled'}
-    </div>
+    </>
   );
 }
 
@@ -128,20 +128,20 @@ function FeatureComponent() {
   const anotherFeatureEnabled = isFeatureEnabled('anotherFeature');
 
   return (
-    <div>
+    <>
       {anotherFeatureEnabled
         ? 'Another Feature enabled'
         : 'Another Feature disabled'}
-    </div>
+    </>
   );
 }
 
 function App() {
   return (
-    <div>
+    <>
       <FeatureComponent />
       <div>Always visible content</div>
-    </div>
+    </>
   );
 }
 
