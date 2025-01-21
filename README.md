@@ -28,9 +28,9 @@ yarn add react-feature-toggler
 
 ## 🚀 Getting Started
 
-### Define Your Features
+### 1. Define Your Features
 
-Create a file to define your feature toggles:
+Create a file to define your feature toggles. This file will contain an object where the keys are feature names and the values are booleans indicating whether the feature is enabled or disabled:
 
 ```ts
 // featureToggles.ts
@@ -40,9 +40,9 @@ export const featureToggles = {
 };
 ```
 
-### Wrap Your React App
+### 2. Wrap Your React App
 
-Wrap your React app in the `FeatureToggleProvider`, passing your feature toggles as a prop:
+Wrap your React app in the `FeatureToggleProvider`, passing your feature toggles as a prop. You can also define an optional callback function to handle disabled features:
 
 ```tsx
 // index.tsx
@@ -65,8 +65,7 @@ root.render(
     onFeatureDisabled={onFeatureDisabled}
   >
     <App />
-  </FeatureToggleProvider>,
-  document.getElementById('root')
+  </FeatureToggleProvider>
 );
 ```
 
@@ -74,12 +73,11 @@ root.render(
 
 ### Use the Hook
 
-Use the `useFeatureToggle` hook to check if a feature is enabled:
+Use the `useFeatureToggle` hook to check if a feature is enabled within your components:
 
 ```tsx
 // App.tsx
 import React from 'react';
-
 import { useFeatureToggle } from 'react-feature-toggler';
 
 function App() {
@@ -102,17 +100,15 @@ function App() {
 }
 
 export default App;
-
 ```
 
 ### Use the HOC
 
-Alternatively, use the withFeatureToggle higher-order component (HOC):
+Alternatively, use the `withFeatureToggle` higher-order component (HOC) to conditionally render components based on feature toggles:
 
 ```tsx
 // App.tsx
 import React from 'react';
-
 import { withFeatureToggle } from 'react-feature-toggler';
 
 function App() {
@@ -129,7 +125,6 @@ You can combine both methods to enable different parts of your app conditionally
 ```tsx
 // App.tsx
 import React from 'react';
-
 import { useFeatureToggle, withFeatureToggle } from 'react-feature-toggler';
 
 function FeatureComponent() {
