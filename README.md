@@ -1,6 +1,6 @@
 # 🔀 React Feature Toggler
 
-A package to help you implement feature toggles in your React app.
+A package for managing feature toggles in React.  
 
 ## 📄 License
 

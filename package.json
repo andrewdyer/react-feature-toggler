@@ -1,6 +1,6 @@
 {
     "name": "react-feature-toggler",
-    "description": "A package to help you implement feature toggles in your React app",
+    "description": "A package for managing feature toggles in React",
     "version": "1.2.0",
     "main": "dist/cjs/index.js",
     "module": "dist/esm/index.js",
