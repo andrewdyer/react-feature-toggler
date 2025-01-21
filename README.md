@@ -6,6 +6,10 @@ A package to help you implement feature toggles in your React app.
 
 Licensed under MIT. Totally free for private or commercial projects.
 
+## ✨ Introduction
+
+React Feature Toggler is a lightweight and easy-to-use library for managing feature flags in your React applications. It allows you to enable or disable features without deploying new code, making it easier to test and roll out new features incrementally.
+
 ## 🚀 Getting Started
 
 To install this package use npm:
