@@ -1,3 +1,5 @@
+![React Feature Toggler](https://github.com/andrewdyer/andrewdyer/blob/main/assets/images/covers/react-feature-toggler.png?raw=true)
+
 # 🔀 React Feature Toggler
 
 A package for managing feature toggles in React.  
