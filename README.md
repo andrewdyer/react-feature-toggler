@@ -12,7 +12,7 @@ Licensed under MIT. Totally free for private or commercial projects.
 
 React Feature Toggler is a lightweight and easy-to-use library for managing feature toggles in your React applications. It allows you to enable or disable features without deploying new code, making it easier to test and roll out new features incrementally.
 
-## 🚀 Getting Started
+## 📥 Installation
 
 To install this package use npm:
 
@@ -20,7 +20,13 @@ To install this package use npm:
 npm install react-feature-toggler
 ```
 
-## 📖 Usage
+Or with Yarn:
+
+```bash
+yarn add react-feature-toggler
+```
+
+## 🚀 Getting Started
 
 ### Define Your Features
 
@@ -62,8 +68,9 @@ root.render(
   </FeatureToggleProvider>,
   document.getElementById('root')
 );
-
 ```
+
+## 📖 Usage
 
 ### Use the Hook
 
