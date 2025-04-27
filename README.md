@@ -1,4 +1,4 @@
-![React Feature Toggler](https://github.com/andrewdyer/andrewdyer/blob/main/assets/images/covers/react-feature-toggler.png?raw=true)
+![React Feature Toggler](https://raw.githubusercontent.com/andrewdyer/public-assets/refs/heads/main/images/covers/react-feature-toggler.png)
 
 # 📦 React Feature Toggler
 
