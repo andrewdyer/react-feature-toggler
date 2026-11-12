@@ -1,153 +1,109 @@
-![React Feature Toggler](https://public-assets.andrewdyer.rocks/images/covers/react-feature-toggler.png)
+# React Feature Toggler
 
-# 📦 React Feature Toggler
+A feature toggle library for React applications that enables or disables features through a provider, hook and higher-order component.
 
-A package for managing feature toggles in React.
+## Introduction
 
-## 📄 License
+This library holds a map of feature names to boolean states in a React context supplied by a provider. Each lookup resolves to the configured state, treating any undefined feature as disabled, and an optional callback is invoked whenever a disabled feature is checked. Components read feature states through a hook, or are wrapped in a higher-order component that renders nothing while its feature is disabled.
 
-Licensed under MIT. Totally free for private or commercial projects.
+## Prerequisites
 
-## ✨ Introduction
+- **[React](https://react.dev/)**: Version 19.2 or later, together with React DOM, installed as peer dependencies.
+- **[Node.js](https://nodejs.org/)**: Version 24.19.0 or later, as specified by the package `engines` field.
 
-React Feature Toggler is a lightweight and easy-to-use library for managing feature toggles in your React applications. It allows you to enable or disable features without deploying new code, making it easier to test and roll out new features incrementally.
-
-## 📥 Installation
-
-To install this package use npm:
+## Installation
 
 ```bash
 npm install react-feature-toggler
 ```
 
-Or with Yarn:
-
 ```bash
 yarn add react-feature-toggler
 ```
 
-## 🚀 Getting Started
-
-### 1. Define Your Features
-
-Create a file to define your feature toggles. This file will contain an object where the keys are feature names and the values are booleans indicating whether the feature is enabled or disabled:
-
-```ts
-// featureToggles.ts
-export const featureToggles = {
-  newFeature: true,
-  anotherFeature: false,
-};
+```bash
+pnpm add react-feature-toggler
 ```
 
-### 2. Wrap Your React App
+## Getting Started
 
-Wrap your React app in the `FeatureToggleProvider`, passing your feature toggles as a prop. You can also define an optional callback function to handle disabled features:
+Wrap the application in a feature toggle provider.
+
+1. Define the feature toggles as an object mapping each feature name to a boolean:
+
+   ```ts
+   export const featureToggles = {
+     newDashboard: true,
+     betaSearch: false,
+   };
+   ```
+
+2. Render `FeatureToggleProvider` at the root of the application, passing the toggles and, optionally, a callback for disabled features:
+
+   ```tsx
+   import { createRoot } from 'react-dom/client';
+   import { FeatureToggleProvider } from 'react-feature-toggler';
+
+   import App from './App';
+   import { featureToggles } from './featureToggles';
+
+   createRoot(document.getElementById('root')!).render(
+     <FeatureToggleProvider
+       featureToggles={featureToggles}
+       onFeatureDisabled={(featureName) =>
+         console.info(`${featureName} is disabled`)
+       }
+     >
+       <App />
+     </FeatureToggleProvider>
+   );
+   ```
+
+## Usage
+
+Feature states are read with a hook or applied declaratively with a higher-order component.
+
+### Checking a feature with the hook
+
+`useFeatureToggle` returns an `isFeatureEnabled` function that resolves a feature name to its current state.
 
 ```tsx
-// index.tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { FeatureToggleProvider } from 'react-feature-toggler';
-import { featureToggles } from './featureToggles';
-import App from './App';
-
-// Optional: Define a callback function to handle disabled features
-const onFeatureDisabled = (featureName: string) => {
-  console.log(`Feature ${featureName} is disabled`);
-};
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-
-root.render(
-  <FeatureToggleProvider
-    featureToggles={featureToggles}
-    onFeatureDisabled={onFeatureDisabled}
-  >
-    <App />
-  </FeatureToggleProvider>
-);
-```
-
-## 📖 Usage
-
-### Use the Hook
-
-Use the `useFeatureToggle` hook to check if a feature is enabled within your components:
-
-```tsx
-// App.tsx
-import React from 'react';
 import { useFeatureToggle } from 'react-feature-toggler';
 
-function App() {
+const SearchBar = () => {
   const { isFeatureEnabled } = useFeatureToggle();
 
-  const newFeatureEnabled = isFeatureEnabled('newFeature');
-  const anotherFeatureEnabled = isFeatureEnabled('anotherFeature');
-
-  return (
-    <>
-      {newFeatureEnabled ? 'New Feature enabled' : 'New Feature disabled'}
-
-      {anotherFeatureEnabled
-        ? 'Another Feature enabled'
-        : 'Another Feature disabled'}
-    </>
-  );
-}
-
-export default App;
+  return isFeatureEnabled('betaSearch') ? <BetaSearch /> : <ClassicSearch />;
+};
 ```
 
-### Use the HOC
+Outside a `FeatureToggleProvider`, every feature resolves as disabled.
 
-Alternatively, use the `withFeatureToggle` higher-order component (HOC) to conditionally render components based on feature toggles:
+### Gating a component with the higher-order component
+
+`withFeatureToggle` renders the wrapped component only when the named feature is enabled, and renders nothing otherwise.
 
 ```tsx
-// App.tsx
-import React from 'react';
 import { withFeatureToggle } from 'react-feature-toggler';
 
-function App() {
-  return <div>Feature enabled</div>;
-}
+const Dashboard = () => <div>New dashboard</div>;
 
-export default withFeatureToggle('newFeature')(App);
+export default withFeatureToggle('newDashboard')(Dashboard);
 ```
 
-### Combining Both Methods
+### Handling disabled features
 
-You can combine both methods to enable different parts of your app conditionally:
+The `onFeatureDisabled` callback receives the feature name each time a disabled or undefined feature is checked, which suits logging or analytics.
 
 ```tsx
-// App.tsx
-import React from 'react';
-import { useFeatureToggle, withFeatureToggle } from 'react-feature-toggler';
-
-function FeatureComponent() {
-  const { isFeatureEnabled } = useFeatureToggle();
-  const anotherFeatureEnabled = isFeatureEnabled('anotherFeature');
-
-  return (
-    <>
-      {anotherFeatureEnabled
-        ? 'Another Feature enabled'
-        : 'Another Feature disabled'}
-    </>
-  );
-}
-
-function App() {
-  return (
-    <>
-      <FeatureComponent />
-      <div>Always visible content</div>
-    </>
-  );
-}
-
-export default withFeatureToggle('newFeature')(App);
+<FeatureToggleProvider
+  featureToggles={{ betaSearch: false }}
+  onFeatureDisabled={(featureName) => console.warn(`${featureName} is off`)}
+>
+  <App />
+</FeatureToggleProvider>
 ```
+
+## License
+
+Licensed under the [MIT License](LICENSE).

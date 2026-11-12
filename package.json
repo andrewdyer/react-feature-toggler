@@ -1,12 +1,16 @@
 {
   "name": "react-feature-toggler",
-  "description": "A package for managing feature toggles in React",
+  "description": "A feature toggle library for React applications that enables or disables features through a provider, hook and higher-order component.",
   "version": "2.0.0",
   "keywords": [
+    "typescript",
     "react",
-    "feature toggles",
-    "feature flags",
-    "typescript"
+    "react-dom",
+    "feature-toggles",
+    "feature-flags",
+    "feature-toggle-provider",
+    "higher-order-component",
+    "hooks"
   ],
   "author": "Andrew Dyer (https://github.com/andrewdyer)",
   "license": "MIT",
