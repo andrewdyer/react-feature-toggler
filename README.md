@@ -2,7 +2,7 @@
 
 # 📦 React Feature Toggler
 
-A package for managing feature toggles in React.  
+A package for managing feature toggles in React.
 
 ## 📄 License
 
@@ -35,8 +35,8 @@ Create a file to define your feature toggles. This file will contain an object w
 ```ts
 // featureToggles.ts
 export const featureToggles = {
-    newFeature: true,
-    anotherFeature: false
+  newFeature: true,
+  anotherFeature: false,
 };
 ```
 
@@ -57,7 +57,9 @@ const onFeatureDisabled = (featureName: string) => {
   console.log(`Feature ${featureName} is disabled`);
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
 
 root.render(
   <FeatureToggleProvider
@@ -88,9 +90,7 @@ function App() {
 
   return (
     <>
-      {newFeatureEnabled
-        ? 'New Feature enabled'
-        : 'New Feature disabled'}
+      {newFeatureEnabled ? 'New Feature enabled' : 'New Feature disabled'}
 
       {anotherFeatureEnabled
         ? 'Another Feature enabled'

@@ -1,13 +1,15 @@
-import React from 'react';
+import { createContext } from 'react';
+import type * as React from 'react';
 
 export interface FeatureToggleContextProps {
-    isFeatureEnabled: (featureName: string) => boolean;
+  isFeatureEnabled: (featureName: string) => boolean;
 }
 
 const defaultContext: FeatureToggleContextProps = {
-    isFeatureEnabled: () => false
+  isFeatureEnabled: () => false,
 };
 
-const FeatureToggleContext = React.createContext<FeatureToggleContextProps>(defaultContext);
+const FeatureToggleContext: React.Context<FeatureToggleContextProps> =
+  createContext<FeatureToggleContextProps>(defaultContext);
 
 export default FeatureToggleContext;

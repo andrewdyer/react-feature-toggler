@@ -1,42 +1,42 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { useFeatureToggle } from '../../hooks';
-import withFeatureToggle from './withFeatureToggle';
 
-jest.mock('../../hooks', () => ({
-    useFeatureToggle: jest.fn()
+import withFeatureToggle from './withFeatureToggle';
+import { useFeatureToggle } from '../../hooks';
+
+vi.mock('../../hooks', () => ({
+  useFeatureToggle: vi.fn(),
 }));
 
-const mockUseFeatureToggle = useFeatureToggle as jest.Mock;
+const mockUseFeatureToggle = vi.mocked(useFeatureToggle);
 
-const MockComponent: React.FC = () => {
-    return <div>Feature Component</div>;
+const MockComponent = () => {
+  return <div>Feature Component</div>;
 };
 
 const WrappedComponent = withFeatureToggle('newFeature')(MockComponent);
 
 describe('withFeatureToggle', () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  test('should render the component when the feature is enabled', () => {
+    mockUseFeatureToggle.mockReturnValue({
+      isFeatureEnabled: (name: string) => name === 'newFeature',
     });
 
-    test('should render the component when the feature is enabled', () => {
-        mockUseFeatureToggle.mockReturnValue({
-            isFeatureEnabled: (name: string) => name === 'newFeature'
-        });
+    render(<WrappedComponent />);
 
-        render(<WrappedComponent />);
+    expect(screen.getByText('Feature Component')).toBeInTheDocument();
+  });
 
-        expect(screen.getByText('Feature Component')).toBeInTheDocument();
+  test('should not render the component when the feature is disabled', () => {
+    mockUseFeatureToggle.mockReturnValue({
+      isFeatureEnabled: () => false,
     });
 
-    test('should not render the component when the feature is disabled', () => {
-        mockUseFeatureToggle.mockReturnValue({
-            isFeatureEnabled: () => false
-        });
+    render(<WrappedComponent />);
 
-        render(<WrappedComponent />);
-
-        expect(screen.queryByText('Feature Component')).toBeNull();
-    });
+    expect(screen.queryByText('Feature Component')).toBeNull();
+  });
 });
