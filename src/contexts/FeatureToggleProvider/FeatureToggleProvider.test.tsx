@@ -1,66 +1,67 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { useContext } from 'react';
+
 import FeatureToggleContext from '../FeatureToggleContext';
 import FeatureToggleProvider from './FeatureToggleProvider';
 
-const TestComponent: React.FC = () => {
-    const { isFeatureEnabled } = React.useContext(FeatureToggleContext);
+const TestComponent = () => {
+  const { isFeatureEnabled } = useContext(FeatureToggleContext);
 
-    const isRegisterEnabled: boolean = isFeatureEnabled('enableRegister');
+  const isRegisterEnabled: boolean = isFeatureEnabled('enableRegister');
 
-    return <div>{isRegisterEnabled ? 'Enabled' : 'Disabled'}</div>;
+  return <div>{isRegisterEnabled ? 'Enabled' : 'Disabled'}</div>;
 };
 
 const renderComponent = (props: {
-    featureToggles: Record<string, boolean>;
-    onFeatureDisabled?: (featureName: string) => void;
+  featureToggles: Record<string, boolean>;
+  onFeatureDisabled?: (featureName: string) => void;
 }) =>
-    render(
-        <FeatureToggleProvider {...props}>
-            <TestComponent />
-        </FeatureToggleProvider>
-    );
+  render(
+    <FeatureToggleProvider {...props}>
+      <TestComponent />
+    </FeatureToggleProvider>
+  );
 
 describe('FeatureToggleProvider', () => {
-    test('should render register feature when enabled', () => {
-        renderComponent({
-            featureToggles: {
-                enableRegister: true
-            }
-        });
-
-        expect(screen.getByText('Enabled')).toBeInTheDocument();
+  test('should render register feature when enabled', () => {
+    renderComponent({
+      featureToggles: {
+        enableRegister: true,
+      },
     });
 
-    test('should not render register feature when disabled', () => {
-        renderComponent({
-            featureToggles: {
-                enableRegister: false
-            }
-        });
+    expect(screen.getByText('Enabled')).toBeInTheDocument();
+  });
 
-        expect(screen.getByText('Disabled')).toBeInTheDocument();
+  test('should not render register feature when disabled', () => {
+    renderComponent({
+      featureToggles: {
+        enableRegister: false,
+      },
     });
 
-    test('should not render register feature by default when undefined', () => {
-        renderComponent({
-            featureToggles: {}
-        });
+    expect(screen.getByText('Disabled')).toBeInTheDocument();
+  });
 
-        expect(screen.getByText('Disabled')).toBeInTheDocument();
+  test('should not render register feature by default when undefined', () => {
+    renderComponent({
+      featureToggles: {},
     });
 
-    test('should call onPermissionError when permission is not granted', () => {
-        const onFeatureDisabled = jest.fn();
+    expect(screen.getByText('Disabled')).toBeInTheDocument();
+  });
 
-        renderComponent({
-            featureToggles: {
-                enableRegister: false
-            },
-            onFeatureDisabled
-        });
+  test('should call onPermissionError when permission is not granted', () => {
+    const onFeatureDisabled = vi.fn();
 
-        expect(onFeatureDisabled).toHaveBeenCalledWith('enableRegister');
-        expect(screen.getByText('Disabled')).toBeInTheDocument();
+    renderComponent({
+      featureToggles: {
+        enableRegister: false,
+      },
+      onFeatureDisabled,
     });
+
+    expect(onFeatureDisabled).toHaveBeenCalledWith('enableRegister');
+    expect(screen.getByText('Disabled')).toBeInTheDocument();
+  });
 });

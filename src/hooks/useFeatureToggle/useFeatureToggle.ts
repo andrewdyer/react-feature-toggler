@@ -1,6 +1,11 @@
-import React from 'react';
-import { FeatureToggleContext, type FeatureToggleContextProps } from '../../contexts';
+import { useContext } from 'react';
 
-const useFeatureToggle = (): FeatureToggleContextProps => React.useContext(FeatureToggleContext);
+import {
+  FeatureToggleContext,
+  type FeatureToggleContextProps,
+} from '../../contexts';
+
+const useFeatureToggle = (): FeatureToggleContextProps =>
+  useContext(FeatureToggleContext);
 
 export default useFeatureToggle;
