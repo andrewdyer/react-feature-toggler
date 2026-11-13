@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/andrewdyer/react-feature-toggler/compare/v2.0.0...v2.0.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* bundle type declarations so nodenext consumers resolve them ([8685c70](https://github.com/andrewdyer/react-feature-toggler/commit/8685c70a03a10552d2dae59e0438cca1db5153b4))
+
 ## [2.0.0](https://github.com/andrewdyer/react-feature-toggler/compare/1.2.0...v2.0.0) (2026-11-12)
 
 
