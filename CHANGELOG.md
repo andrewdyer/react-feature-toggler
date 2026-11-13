@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/andrewdyer/react-feature-toggler/compare/v2.0.1...v2.0.2) (2026-11-13)
+
+
+### Bug Fixes
+
+* drop node engines constraint from published package ([01efa19](https://github.com/andrewdyer/react-feature-toggler/commit/01efa19dd82b4a02686369915fff85f1ca2243cb))
+
 ## [2.0.1](https://github.com/andrewdyer/react-feature-toggler/compare/v2.0.0...v2.0.1) (2026-11-13)
 
 
