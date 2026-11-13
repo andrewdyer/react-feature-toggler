@@ -9,7 +9,6 @@ This library holds a map of feature names to boolean states in a React context s
 ## Prerequisites
 
 - **[React](https://react.dev/)**: Version 19.2 or later, together with React DOM, installed as peer dependencies.
-- **[Node.js](https://nodejs.org/)**: Version 24.19.0 or later, as specified by the package `engines` field.
 
 ## Installation
 
