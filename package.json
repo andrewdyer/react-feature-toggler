@@ -1,7 +1,7 @@
 {
   "name": "react-feature-toggler",
   "description": "A feature toggle library for React applications that enables or disables features through a provider, hook and higher-order component.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "keywords": [
     "typescript",
     "react",
